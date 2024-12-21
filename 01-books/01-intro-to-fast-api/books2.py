@@ -55,12 +55,12 @@ BOOKS = [
 ]
 
 
-@app.get("/books")
+@app.get("/books", status_code=status.HTTP_200_OK)
 async def read_books():
     return BOOKS
 
 
-@app.get('/books/{book_id}')
+@app.get('/books/{book_id}', status_code=status.HTTP_200_OK)
 async def read_book(book_id: int = Path(gt=0)):
     for book in BOOKS:
         if book.id == book_id:
@@ -68,7 +68,7 @@ async def read_book(book_id: int = Path(gt=0)):
     raise HTTPException(status_code=404, detail="Book not found")
 
 
-@app.get('/books/')
+@app.get('/books/', status_code=status.HTTP_200_OK)
 async def read_books_by_rating(rating: int = Query(gt=0,lt=6)):
     books_to_return = []
     for book in BOOKS:
@@ -82,7 +82,7 @@ async def read_books_by_rating(rating: int = Query(gt=0,lt=6)):
 #     BOOKS.append(book_request)
 
 
-@app.post('/create-book')
+@app.post('/create-book', status_code=status.HTTP_201_CREATED)
 async def create_book(book_request: BookRequest):
     new_book = Book(**book_request.dict())
     BOOKS.append(find_book_id(new_book))
@@ -93,14 +93,14 @@ def find_book_id(book: Book):
     return book
 
 
-@app.put('/books/update_book')
+@app.put('/books/update_book', status_code=status.HTTP_204_NO_CONTENT)
 async def update_book(book: BookRequest):
     for i in range(len(BOOKS)):
         if BOOKS[i].id == book.id:
             BOOKS[i] = book
 
 
-@app.delete('/books/{book_id}')
+@app.delete('/books/{book_id}', status_code=status.HTTP_204_NO_CONTENT)
 async def delete_book(book_id: int = Path(gt=0, le=len(BOOKS))):
     for i in range(len(BOOKS)):
         if BOOKS[i].id == book_id:
@@ -108,7 +108,7 @@ async def delete_book(book_id: int = Path(gt=0, le=len(BOOKS))):
             break
 
 
-@app.get('/books/published_date/')
+@app.get('/books/published_date/', status_code=status.HTTP_200_OK)
 async def get_book_by_published_data(published_date: int = Query(gt=1888, le=2024)):
     books_to_return = []
     for book in BOOKS:
