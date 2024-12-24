@@ -1,5 +1,19 @@
 from database import Base
-from sqlalchemy import Column, String, Integer, Boolean
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
+
+
+class Users(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True)
+    first_name = Column(String)
+    last_name = Column(String)
+    hashed_password = Column(String)
+    is_active = Column(default=True)
+    role = Column(String)
+
+
 
 class Todos(Base):
     __tablename__ = 'todos'  # Bu jadvalning nomini belgilaydi. Ma'lumotlar bazasida ushbu sinf todos nomli jadval sifatida saqlanadi.
@@ -9,3 +23,4 @@ class Todos(Base):
     description = Column(String)
     priority = Column(Integer)
     complete = Column(Boolean, default=False)
+
