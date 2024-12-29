@@ -9,7 +9,7 @@ from database import SessionLocal
 from models import Users
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt
 
 router = APIRouter()
