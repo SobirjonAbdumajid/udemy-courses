@@ -27,6 +27,7 @@ class MakeUserRequest(BaseModel):
     email: str
     first_name: str
     last_name: str
+    phone_number: str
     password: str
     role: str
 
@@ -34,7 +35,6 @@ class MakeUserRequest(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
-
 
 
 def get_db():
@@ -87,6 +87,7 @@ async def get_user(db: db_dependency,
         username=user_request.username,
         first_name=user_request.first_name,
         last_name=user_request.last_name,
+        phone_number=user_request.phone_number,
         hashed_password=bcrypt_context.hash(user_request.password),
         role=user_request.role,
         is_active=True
