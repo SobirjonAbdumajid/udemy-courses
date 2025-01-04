@@ -12,6 +12,6 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread
 
 # engine = create_engine(SQLALCHEMY_DATABASE_URL)  # connect_args is for detecting more database errors but in default we can get a error only
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind = engine)  # if these are not False - autocommit=False, autoflush=False - aur database may try do somthing authomaticly
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)  # if these are not False - autocommit=False, autoflush=False - aur database may try do somthing authomaticly
 
 Base = declarative_base()  # we may controller database by using this
