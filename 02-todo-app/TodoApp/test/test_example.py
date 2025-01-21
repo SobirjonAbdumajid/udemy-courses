@@ -1,3 +1,5 @@
+import pytest
+
 def test_equal_or_not_equal():
     assert 3 == 3
     assert 3 != 1
@@ -30,3 +32,5 @@ def test_list():
     assert 6 not in num_list
     assert all(num_list)
     assert not all(any_list)
+
+
