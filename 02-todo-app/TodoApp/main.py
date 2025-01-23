@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from database import engine
+from .database import engine
 import models
 from routers import auth, todos, admin, users
 
