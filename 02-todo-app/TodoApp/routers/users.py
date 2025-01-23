@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from database import SessionLocal, engine
+from ..database import SessionLocal, engine
 from typing import Annotated
 from sqlalchemy.orm import Session
-from routers.auth import get_current_user
-from models import Users
+from .auth import get_current_user
+from ..models import Users
 from passlib.context import CryptContext
 from pydantic import BaseModel
 
