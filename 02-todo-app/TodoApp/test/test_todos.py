@@ -1,13 +1,6 @@
-from sqlalchemy import create_engine, text
-from sqlalchemy.pool import StaticPool
-from sqlalchemy.orm import sessionmaker
-from ..database import Base
-from ..main import app
 from ..routers.todos import get_db, get_current_user
-from fastapi.testclient import TestClient
 from fastapi import status
-import pytest
-from ..models import Todos
+from .utils import *
 
 app.dependency_overrides[get_db] = override_get_db
 app.dependency_overrides[get_current_user] = override_get_current_user
