@@ -5,7 +5,8 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import sessionmaker
 from TodoApp.database import Base
 from TodoApp.main import app
-from TodoApp.models import Todos
+from TodoApp.models import Todos, Users
+from ..routers.auth import bcrypt_context
 import pytest
 
 
@@ -52,3 +53,24 @@ def test_todo():
         connection.commit()
         # db.delete(todo)
     # db.rollback()
+
+
+@pytest.fixture
+def test_user():
+    user = Users(
+        username='sobirjonabdumajidtest',
+        email='sobirjon.abdumajid@gmail.com',
+        first_name='Sobirjon',
+        last_name='Abdumajid',
+        hashed_password=bcrypt_context.hash("sobirjon123"),
+        role='admin',
+        phone_number="1234567890"
+    )
+
+    db = TestingSessionLocal()
+    db.add(user)
+    db.commit()
+    yield user
+    with engine.connect() as connection:
+        connection.execute(text("DELETE FROM users;"))
+        connection.commit()

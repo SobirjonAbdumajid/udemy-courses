@@ -14,7 +14,7 @@ class UserVerification(BaseModel):
 
 
 router = APIRouter(
-    prefix="/users",
+    prefix="/user",
     tags=["users"]
 )
 
@@ -32,7 +32,7 @@ user_dependency = Annotated[dict, Depends(get_current_user)]
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-@router.get("/get-user")
+@router.get("/")
 async def get_user(user: user_dependency, db: db_dependency):
     # if user is None:
     #     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication Failed")
@@ -41,7 +41,7 @@ async def get_user(user: user_dependency, db: db_dependency):
     return current_user
 
 
-@router.put("/change-password", status_code=status.HTTP_204_NO_CONTENT)
+@router.put("/password", status_code=status.HTTP_204_NO_CONTENT)
 async def change_password(user: user_dependency, db: db_dependency,
                           user_verification: UserVerification):
     current_user = db.query(Users).filter(Users.id == user.get('id')).first()
