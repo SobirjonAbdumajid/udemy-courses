@@ -56,7 +56,7 @@ async def change_password(user: user_dependency, db: db_dependency,
     db.commit()
 
 
-@router.put('/change-phone/{new_phone_number}', status_code=status.HTTP_204_NO_CONTENT)
+@router.put('/phonenumber/{new_phone_number}', status_code=status.HTTP_204_NO_CONTENT)
 async def change_phone(user: user_dependency, db: db_dependency, new_phone_number):
     current_user = db.query(Users).filter(Users.id == user.get('id')).first()
     if user is None:
