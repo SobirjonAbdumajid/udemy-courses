@@ -53,7 +53,7 @@ async def todo_page(request: Request, db: db_dependency):
 
         todos = db.query(Todos).filter(Todos.owner_id == user['id']).all()
         return templates.TemplateResponse("todo.html", {"request": request, "todos": todos, "user": user})
-    except Exception as e:
+    except Exception:
         return redirect_to_login()
 
 
