@@ -17,7 +17,7 @@ router = APIRouter(
 def get_db():
     db = SessionLocal()
     try:
-        yield db  # Makes db available to the calling function (e.g., a route handler).
+        yield db
     finally:
         db.close()
 
